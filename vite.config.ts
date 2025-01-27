@@ -19,7 +19,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [
     devServer({
-      entry: "server.ts",
+      entry: "server/server.ts",
 
       exclude: [
         /^\/@.+$/,

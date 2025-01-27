@@ -1,10 +1,12 @@
+// How to serve Vike (SSR middleware) via a Hono server.
+// https://github.com/phonzammi/vike-hono-example/blob/main/server/index.ts
 import { privateConfig } from "@/config.private";
-
+import { trpcServer } from "@hono/trpc-server";
 import { Hono } from "hono";
-
 import { serveStatic } from "hono/bun";
 import { renderPage } from "vike/server";
-import { appRouter } from "./server/_app";
+import { appRouter } from "./_app";
+import { createContext } from "./context";
 
 const app = new Hono();
 
@@ -14,7 +16,15 @@ app.get("/up", async (c) => {
 });
 
 // For the Backend APIs
-app.route("/api/*", appRouter);
+app.use(
+  "/api/*",
+  trpcServer({
+    router: appRouter,
+    createContext(opts, c) {
+      return createContext(c);
+    },
+  })
+);
 
 if (privateConfig.NODE_ENV === "production") {
   app.use(
@@ -46,14 +56,24 @@ app.get("*", async (c, next) => {
 });
 
 // Returning errors.
-app.onError((_, c) => {
+app.onError((error, c) => {
+  // Sentry.captureException(error); // Add sentry here or any monitoring service.
+
+  console.error({
+    cause: error.cause,
+    message: error.message,
+    stack: error.stack,
+  });
+
   return c.json(
     {
       error: {
+        cause: error.cause,
         message: c.error?.message ?? "Something went wrong.",
+        stack: privateConfig.NODE_ENV === "production" ? undefined : error.stack,
       },
     },
-    500
+    error.cause ?? 500
   );
 });
 

@@ -1,24 +1,9 @@
-import { Hono } from "hono";
+import { publicProcedure, router } from "@/server/trpc";
 
-export const authController = new Hono()
-  .basePath("auth")
-  .get("/", async (c) => {
-    return c.json({
-      user: null,
-      session: null,
-    });
-  })
-  .get("/users", async (c) => {
-    return c.json({
-      users: [
-        {
-          id: 1,
-          name: "Carlo",
-        },
-        {
-          id: 2,
-          name: "Andrea",
-        },
-      ],
-    });
-  });
+export const authRouter = router({
+  users: publicProcedure.query(async ({}) => {
+    return {
+      users: ["user1", "user2", "user3"],
+    };
+  }),
+});

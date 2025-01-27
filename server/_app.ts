@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { csrf } from "hono/csrf";
-import { authController } from "./modules/auth/auth.controller";
-import { todosController } from "./modules/todos/todos.controller";
+import { authRouter } from "./modules/auth/auth.controller";
+import { router } from "./trpc";
 
 const app = new Hono();
 
@@ -10,8 +10,9 @@ app.use(csrf());
 /**
  * The base router. Include all the routes here from `./routes/*`
  */
-export const appRouter = app
-    .route("/", authController)
-    .route("/", todosController);
+export const appRouter = router({
+  auth: authRouter,
+  // Extend other routers here.
+});
 
 export type AppRouter = typeof appRouter;
