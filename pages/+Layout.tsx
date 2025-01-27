@@ -1,11 +1,10 @@
-import getTitle from "@/utils/get-title";
 import { type FlowProps } from "solid-js";
 import { useMetadata } from "vike-metadata-solid";
 
 import "./global.css";
 
 useMetadata.setGlobalDefaults({
-  title: getTitle("Home"),
+  title: "Pagzone Play",
   // description: "Demo showcasing Vike and Solid.",
 });
 
