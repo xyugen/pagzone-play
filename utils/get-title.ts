@@ -1,5 +1,6 @@
-const TITLE_TEMPLATE = "%s | Pagzone Play";
+const TITLE = "PZPlay";
 
-export default function getTitle(title: string = "Home") {
-  return TITLE_TEMPLATE.replace("%s", title);
+export default function getTitle(title?: string) {
+  if (!title) return TITLE;
+  return `%s | ${TITLE}`.replace("%s", title);
 }
