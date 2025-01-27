@@ -27,8 +27,10 @@
     "vite": "^6.0.11"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.0",
     "hono": "^4.6.18",
     "solid-js": "^1.9.4",
+    "tailwindcss": "^4.0.0",
     "vike": "0.4.218",
     "vike-metadata-solid": "^1.0.4",
     "vike-solid": "^0.7.8"
