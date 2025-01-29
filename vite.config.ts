@@ -48,4 +48,7 @@ export default defineConfig({
       "@": resolve(root),
     },
   },
+  optimizeDeps: {
+    exclude: ["lucide-solid"],
+  },
 });
