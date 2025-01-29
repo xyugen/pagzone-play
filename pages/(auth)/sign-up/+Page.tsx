@@ -33,20 +33,25 @@ const Page = () => {
     onSubmit: async (values) => {
       const { username, email, password } = values;
 
-      const { data, error } = await authClient.signUp.email({
+      const { error } = await authClient.signUp.email({
         name: username,
         email,
         password,
       });
 
       if (error) {
-        throw error;
+        console.log(error);
+        throw new Error(error.message);
       }
 
       toast.success("Account created successfully");
     },
     onError: (error) => {
-      toast.error("Something went wrong");
+      if (error instanceof Error) {
+        toast.error(error.message ?? "Something went wrong");
+      } else {
+        toast.error("Something went wrong");
+      }
       console.log(error);
     },
   });

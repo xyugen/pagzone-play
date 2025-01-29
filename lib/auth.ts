@@ -3,6 +3,7 @@ import { db } from "@/server/db";
 import * as schema from "@/server/db/schema";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { admin } from "better-auth/plugins";
 
 export const auth = betterAuth({
   trustedOrigins: [publicConfig.BETTER_AUTH_URL],
@@ -20,4 +21,5 @@ export const auth = betterAuth({
     enabled: true,
     autoSignIn: false,
   },
+  plugins: [admin()],
 });

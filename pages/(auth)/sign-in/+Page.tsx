@@ -28,20 +28,24 @@ const Page = () => {
     onSubmit: async (values) => {
       const { email, password, rememberMe } = values;
 
-      const { data, error } = await authClient.signIn.email({
+      const { error } = await authClient.signIn.email({
         email,
         password,
         rememberMe,
       });
 
       if (error) {
-        throw error;
+        throw new Error(error.message);
       }
 
       toast.success("Signed in successfully");
     },
     onError: (error) => {
-      toast.error("Something went wrong");
+      if (error instanceof Error) {
+        toast.error(error.message ?? "Something went wrong");
+      } else {
+        toast.error("Something went wrong");
+      }
       console.log(error);
     },
   });
