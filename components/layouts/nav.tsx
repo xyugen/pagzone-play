@@ -10,12 +10,12 @@ const Nav = () => {
   const navLinks = createMemo<{ name: string; href: PageRoutes; visible: () => boolean }[]>(() => [
     {
       name: "Sign In",
-      href: PageRoutes.Login,
+      href: PageRoutes.SignIn,
       visible: () => true,
     },
     {
       name: "Sign Up",
-      href: PageRoutes.Register,
+      href: PageRoutes.SignUp,
       visible: () => true,
     },
   ]);
@@ -29,7 +29,7 @@ const Nav = () => {
               <li>
                 <a
                   href={href}
-                  class={cn(isLinkActive(href, pageContext.urlPathname) && "text-blue-500")}
+                  class={cn(isLinkActive(href, pageContext.urlPathname) && "text-red-400")}
                 >
                   {name}
                 </a>

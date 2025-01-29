@@ -1,6 +1,7 @@
 export enum PageRoutes {
   Home = "/",
-  Login = "/login",
-  Register = "/register",
+  SignIn = "/sign-in",
+  SignUp = "/sign-up",
+  ForgotPassword = "/forgot-password",
   About = "/about",
 }
