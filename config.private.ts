@@ -8,4 +8,6 @@ export const privateConfig = {
   TURSO_DATABASE_URL: process.env.TURSO_DATABASE_URL as string,
   /** Database Auth Token. */
   TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN as string,
+  /** Better Auth Secret */
+  BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET as string,
 };

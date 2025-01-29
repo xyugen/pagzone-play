@@ -1,6 +1,7 @@
 // How to serve Vike (SSR middleware) via a Hono server.
 // https://github.com/phonzammi/vike-hono-example/blob/main/server/index.ts
 import { privateConfig } from "@/config.private";
+import { auth } from "@/lib/auth";
 import { trpcServer } from "@hono/trpc-server";
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
@@ -13,6 +14,11 @@ const app = new Hono();
 // Health checks
 app.get("/up", async (c) => {
   return c.newResponse("🟢 UP", { status: 200 });
+});
+
+// For Better Auth
+app.on(["POST", "GET"], "/api/auth/**", (c) => {
+  return auth.handler(c.req.raw);
 });
 
 // For the Backend APIs
