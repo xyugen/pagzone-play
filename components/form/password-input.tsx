@@ -30,9 +30,9 @@ const PasswordInput = (props: JSX.InputHTMLAttributes<HTMLInputElement>) => {
       >
         <Show
           when={showPassword()}
-          fallback={<EyeOff class="size-5 text-red-400 hover:text-red-400/80 transition-colors" />}
+          fallback={<EyeOff class="size-5 text-red-400 hover:text-red-500/80 transition-colors" />}
         >
-          <Eye class="size-5 text-red-400 hover:text-red-400/80 transition-colors" />
+          <Eye class="size-5 text-red-400 hover:text-red-500/80 transition-colors" />
         </Show>
       </button>
     </div>
