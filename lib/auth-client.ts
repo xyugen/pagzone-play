@@ -1,5 +1,5 @@
-import { privateConfig } from "@/config.private";
+import { publicConfig } from "@/config.public";
 import { createAuthClient } from "better-auth/solid";
 export const authClient = createAuthClient({
-  baseURL: privateConfig.BETTER_AUTH_URL,
+  baseURL: publicConfig.BETTER_AUTH_URL,
 });
